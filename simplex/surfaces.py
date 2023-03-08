@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 import math
-import utils
+import simplex.utils as utils
 
 
 def get_basis(model, anchor=0, base1=1, base2=2):

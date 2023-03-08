@@ -1,7 +1,7 @@
 import math
 import torch
 import gpytorch
-import utils
+import simplex.utils as utils
 import time
 
 def volume_loss(model):

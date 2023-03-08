@@ -7,8 +7,7 @@ from torch.nn import Module, Parameter
 from torch.nn.modules.utils import _pair
 from scipy.special import binom
 import sys
-sys.path.append("..")
-import utils
+import simplex.utils as utils
 from simplex_helpers import complex_volume
 
 class SimplicialComplex(Module):
@@ -437,3 +436,8 @@ class SimplexNet(Module):
 #             vol += complex_volume(self, simp)
         vol = complex_volume(self, 0)
         return vol
+
+class LinearGraphnet(Linear):
+    def forward(self, input):
+        coeffs_t = input.coeffs_t
+        return super().forward(input, coeffs_t)

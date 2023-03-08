@@ -10,10 +10,8 @@ import torchvision
 from torchvision import transforms
 
 import sys
-sys.path.append("../../simplex/")
-import utils
+import simplex.utils as utils
 
-sys.path.append("../../simplex/models/")
 from vgg_noBN import VGG16, VGG16Simplex
 from simplex_models import SimplexNet, Simplex
 

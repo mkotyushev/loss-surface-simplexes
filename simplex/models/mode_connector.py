@@ -7,8 +7,7 @@ from torch.nn import Module, Parameter
 from torch.nn.modules.utils import _pair
 from scipy.special import binom
 import sys
-sys.path.append("..")
-import utils
+import simplex.utils as utils
 from simplex_helpers import complex_volume
 
 class SimplicialComplex(Module):
@@ -54,7 +53,7 @@ class ModeConnector(Module):
         self.n_mode = n_mode
 
 
-        simplicial_complex = {ii:[ii, n_mode] for ii in range(n_mode)]}
+        simplicial_complex = {ii:[ii, n_mode] for ii in range(n_mode)}
 
         self.simplicial_complex = simplicial_complex
         self.n_simplex = len(simplicial_complex)

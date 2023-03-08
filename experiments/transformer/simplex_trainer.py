@@ -16,14 +16,11 @@ import tabulate
 import os
 import sys
 
-sys.path.append("../../simplex/")
-import utils as simp_utils
+import simplex.utils as simp_utils
 
 import time
-sys.path.append("../../simplex/models/")
 from basic_simplex import BasicSimplex
 
-sys.path.append("../../../ViT-pytorch/utils")
 from data_utils import get_loader
 from models.modeling import VisionTransformer, CONFIGS
         

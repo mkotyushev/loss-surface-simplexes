@@ -14,12 +14,10 @@ import tabulate
 
 import os
 import sys
-sys.path.append("../../simplex/")
-import utils
+import simplex.utils as utils
 from simplex_helpers import volume_loss
 import surfaces
 import time
-sys.path.append("../../simplex/models/")
 from vgg_noBN import VGG16, VGG16Simplex
 from simplex_models import SimplexNet, Simplex
         
