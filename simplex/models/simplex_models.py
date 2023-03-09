@@ -436,8 +436,3 @@ class SimplexNet(Module):
 #             vol += complex_volume(self, simp)
         vol = complex_volume(self, 0)
         return vol
-
-class LinearGraphnet(Linear):
-    def forward(self, input):
-        coeffs_t = input.coeffs_t
-        return super().forward(input, coeffs_t)
