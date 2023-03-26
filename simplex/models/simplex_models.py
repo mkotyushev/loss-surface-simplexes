@@ -339,8 +339,8 @@ class SimplexNet(Module):
         return np.concatenate([w.detach().cpu().numpy().ravel() for w in weights])
 
     def forward(self, input, t=None):
-        if t is None:
-            t = input.data.new(1).uniform_()
+        # if t is None:
+        #     t = torch.tensor(1).uniform_()
         coeffs_t = self.vertex_weights()
         output = self.net(input, coeffs_t)
         return output
