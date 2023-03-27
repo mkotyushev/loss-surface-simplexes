@@ -339,8 +339,9 @@ class SimplexNet(Module):
         return np.concatenate([w.detach().cpu().numpy().ravel() for w in weights])
 
     def forward(self, input, t=None):
-        # if t is None:
-        #     t = torch.tensor(1).uniform_()
+        if t is None:
+            a = torch.tensor([1], dtype=torch.float64)
+            t = a.new(1).uniform_()
         coeffs_t = self.vertex_weights()
         output = self.net(input, coeffs_t)
         return output
@@ -365,7 +366,7 @@ class SimplexNet(Module):
 
         return par_vecs
 
-    def add_vert(self, to_simplexes=[0]):
+    def add_vert(self, to_simplexes=[0], randomize_second_vertex=False):
 
         self.fix_points = [True] * self.n_vert + [False]
         new_model = self.architecture(self.n_output,
@@ -392,6 +393,11 @@ class SimplexNet(Module):
         center_pars = utils.unflatten_like(center_pars, new_parameters)
         for cntr, par in zip(center_pars, new_parameters):
             par.data = cntr.to(par.device)
+            # Add random perturbation for second vertex so it does not
+            # start at the same point as the first vertex
+            if randomize_second_vertex and self.n_vert == 1:
+                with torch.no_grad():
+                    par.data = par.data + 1e-3 * torch.abs(par.data).mean() * torch.randn_like(par.data)
 
         ## update self values ##
         self.n_vert += 1

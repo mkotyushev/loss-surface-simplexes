@@ -28,10 +28,10 @@ def complex_volume(model, ind):
     n_vert = len(model.simplicial_complex[ind])
     total_vert = model.n_vert
         
-    mat = torch.ones(n_vert+1, n_vert+1) - torch.eye(n_vert + 1)
+    temp_pars = [p for p in model.net.parameters()][0::total_vert]
+    mat = torch.ones(n_vert+1, n_vert+1, device=temp_pars[0].device) - torch.eye(n_vert + 1, device=temp_pars[0].device)
     
     ## compute distance between parameters ##
-    temp_pars = [p for p in model.net.parameters()][0::total_vert]
     n_par = int(sum([p.numel() for p in temp_pars]))
     par_vecs = torch.zeros(n_vert, n_par).to(temp_pars[0].device)
     for ii, vv in enumerate(model.simplicial_complex[ind]):
