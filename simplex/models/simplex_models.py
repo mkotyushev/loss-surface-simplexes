@@ -283,6 +283,14 @@ class BatchNorm2d(_BatchNorm):
                              .format(input.dim()))
 
 
+class BatchNorm1d(_BatchNorm):
+
+    def _check_input_dim(self, input):
+        if input.dim() != 2:
+            raise ValueError('expected 2D input (got {}D input)'
+                             .format(input.dim()))
+
+
 class SimplexNet(Module):
     def __init__(self, n_output, architecture, n_vert, fix_points=None,
                  architecture_kwargs={}, simplicial_complex=None):
